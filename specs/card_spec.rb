@@ -17,8 +17,4 @@ describe Card do
 
     expect(card.print).to eq "Q of hearts"
   end
-
-  it 'generates all cards' do
-    p Card.new('heart', '5').generate_deck.length
-  end
 end
