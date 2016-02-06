@@ -11,10 +11,6 @@ class Card
     "#{@value} of #{pluralize(@color)}"
   end
 
-  def ==(other)
-    @card == other.card
-  end
-
   private
 
   def pluralize(singular)

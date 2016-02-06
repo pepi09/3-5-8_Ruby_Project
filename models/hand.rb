@@ -15,17 +15,10 @@ class Hand
   end
 
   def apply_talon(talon, cards_to_replace)
-    i = 0
-    @cards.each do |card|
-      if cards_to_replace.include? card
-        @cards.push(talon.cards[i])
-        i += 1
-      end
-    end
-
     cards_to_replace.each do |card|
       @cards.delete(card)
     end
+    @cards.concat(talon.cards)
   end
 
   def print_hand
