@@ -11,6 +11,14 @@ class Card
     "#{@value} of #{pluralize(@color)}"
   end
 
+  def <=>(other)
+    return unless @color == other.color
+
+    arranged_values = (2..10).to_a.push('J', 'Q', 'K', 'A')
+
+    arranged_values.index(@value) <=> arranged_values.index(other.value)
+  end
+
   private
 
   def pluralize(singular)
