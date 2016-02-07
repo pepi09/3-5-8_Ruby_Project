@@ -1,3 +1,5 @@
+require_relative 'spec_helper.rb'
+
 describe Card do
   it "returns the color of the card" do
     expect(Card.new("heart", "Q").color).to eq 'heart'
@@ -12,9 +14,9 @@ describe Card do
     expect(Card.new("heart", "Q").card).to eq card
   end
 
-  it 'prints the card' do
+  it 'prints the card humanized' do
     card = Card.new("heart", "Q")
 
-    expect(card.print).to eq "Q of hearts"
+    expect(card.humanize).to eq "Q of hearts"
   end
 end

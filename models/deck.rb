@@ -12,28 +12,46 @@ class Deck
 
     colors.each do |color|
       values.each do |value|
-        @cards.push(Card.new(color, value).card)
+        @cards.push(Card.new(color, value))
       end
     end
-    @cards
   end
 
   def shuffle
     @cards.shuffle!
+    return
   end
 
   def draw
+    hands, talon = [], []
     shuffle
 
     (0..2).each do |n|
-      start = n + 16
-      @hands.push(Hand.new(@cards[start, start + 16]))
-      @talon = Talon.new(@cards.reverse[0, 4])
+      start = n == 0 ? 0 : n * 16
+      hands.push(Hand.new(@cards[start, 16]))
+    end
 
-      {
-        hands: @hands,
-        talon: @talon
-      }
+    talon = Talon.new(@cards.reverse[0, 4])
+
+    {
+      hands: hands,
+      talon: talon
+    }
+  end
+
+  def humanize_cards
+    humanized_cards = []
+    @cards.each do |card|
+      humanized_cards.push card.humanize
+    end
+    humanized_cards
+  end
+
+  def ==(other)
+    (0...52).each do |index|
+      unless @cards[index].card == other.cards[index].card
+        return false
+      end
     end
   end
 end

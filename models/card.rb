@@ -7,7 +7,7 @@ class Card
     @card = { @color.to_sym => @value }
   end
 
-  def print
+  def humanize
     "#{@value} of #{pluralize(@color)}"
   end
 
