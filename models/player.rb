@@ -1,14 +1,66 @@
 class Player
-  attr_accessor :hand
+  attr_accessor :hand, :trump
 
   def initialize(hand)
     @hand = hand
+    @trump = @hand.cards.first.color
   end
 
-  def choose_trump_card
-    @hand.divide_into_colors
-    posle tursim color.length
-    i ako ima nai golqm toi e koz
-    ako ne tursim silni karti ili neshto takova
+  def choose_trump_color
+    @hand.grouped_cards.each do |color, cards|
+      if cards.length > @hand.grouped_cards[@trump].length
+        @trump = color
+      end
+    end
+  end
+
+  def draw_card(p1_card = nil, p2_card = nil)
+    if p1_card and p2_card
+      choose_card(p1_card, p2_card)
+    elsif p1_card
+      choose_card(p1_card)
+    else
+      return my_max_card(@hand.grouped_cards.first.first)
+    end
+  end
+
+  def choose_card(p1_card, p2_card = nil)
+    max_card = p2_card ? compare_cards(p1_card, p2_card) : p1_card
+
+    if @hand.grouped_cards[p1_card.color]
+      if max_card.color == p1_card.color
+        return my_max_card(p1_card.color) > max_card ? my_max_card(p1_card.color) : my_min_card(p1_card.color)
+      else
+        return my_min_card(p1_card.color)
+      end
+    elsif @hand.grouped_cards[@trump]
+      if max_card.color == @trump
+        return my_max_card(@trump) > max_card ? my_max_card(@trump) : my_min_card(@trump)
+      else
+        return my_min_card(@trump)
+      end
+    else
+      return my_min_card(@hand.grouped_cards.first.first)
+    end
+  end
+
+  def my_max_card(color)
+    @hand.grouped_cards[color].last
+  end
+
+  def my_min_card(color)
+    @hand.grouped_cards[color].first
+  end
+
+  def compare_cards(p1_card, p2_card)
+    if p1_card.color == p2_card.color
+      return p1_card > p2_card ? p1_card : p2_card
+    elsif p1_card.color == @trump
+      return p1_card
+    elsif p2_card.color == @trump
+      return p2_card
+    else
+      return p1_card
+    end
   end
 end

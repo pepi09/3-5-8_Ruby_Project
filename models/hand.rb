@@ -39,6 +39,8 @@ class Hand
   end
 
   def arrange_cards
+    divide_into_colors if @grouped_cards.empty?
+
     @grouped_cards.each do |color, cards|
       cards.sort!
     end
