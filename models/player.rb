@@ -3,6 +3,7 @@ class Player
 
   def initialize(hand)
     @hand = hand
+    # p hand
     @trump = @hand.cards.first.color
   end
 

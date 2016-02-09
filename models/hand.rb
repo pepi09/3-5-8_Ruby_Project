@@ -35,7 +35,6 @@ class Hand
         puts card.value
       end
     end
-    return
   end
 
   def arrange_cards
