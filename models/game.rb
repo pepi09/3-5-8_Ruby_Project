@@ -26,7 +26,14 @@ class Game
   end
 
   def player_on_turn(index)
-
+    case index
+    when 1
+      [1, 2, 3]
+    when 2
+      [2, 3, 1]
+    when 3
+      [3, 1, 2]
+    end
   end
 
   def set_sequence(number)
@@ -40,5 +47,9 @@ class Game
     end
   end
 
-
+  def set_trump(trump)
+    @players.each do |player|
+      player.trump = trump
+    end
+  end
 end

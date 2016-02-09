@@ -19,12 +19,15 @@ class Player
     p2_card = drawed_cards[1] ? drawed_cards[1] : nil
 
     if p1_card and p2_card
-      choose_card(p1_card, p2_card)
+      chosen_card = choose_card(p1_card, p2_card)
     elsif p1_card
-      choose_card(p1_card)
+      chosen_card = choose_card(p1_card)
     else
-      return my_max_card(@hand.grouped_cards.first.first)
+      chosen_card = my_max_card(@hand.grouped_cards.first.first)
     end
+
+    @hand.drop_chosen_card(chosen_card)
+    chosen_card
   end
 
   def choose_card(p1_card, p2_card = nil)

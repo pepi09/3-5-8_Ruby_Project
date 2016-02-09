@@ -29,10 +29,10 @@ class Hand
   end
 
   def print_hand
-    divide_into_colors.each do |color, cards|
+    @grouped_cards.each do |color, cards|
       p color
       cards.each do |card|
-        puts card.card
+        puts card.value
       end
     end
     return
@@ -44,5 +44,11 @@ class Hand
     @grouped_cards.each do |color, cards|
       cards.sort!
     end
+  end
+
+  def drop_chosen_card(card)
+    @cards.delete(card)
+    divide_into_colors
+    arrange_cards
   end
 end
