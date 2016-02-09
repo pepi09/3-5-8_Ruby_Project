@@ -1,5 +1,5 @@
 class Player
-  attr_accessor :hand, :trump
+  attr_accessor :hand, :trump, :min_wins, :current_wins
 
   def initialize(hand)
     @hand = hand
@@ -14,7 +14,10 @@ class Player
     end
   end
 
-  def draw_card(p1_card = nil, p2_card = nil)
+  def draw_card(drawed_cards)
+    p1_card = drawed_cards[0] ? drawed_cards[0] : nil
+    p2_card = drawed_cards[1] ? drawed_cards[1] : nil
+
     if p1_card and p2_card
       choose_card(p1_card, p2_card)
     elsif p1_card

@@ -10,7 +10,7 @@ describe Player do
     @player = Player.new(Hand.new(@deck))
   end
 
-  context 'chooses trump card' do
+  context 'chooses trump color' do
 
     context 'when all colors are with equal length' do
 
@@ -38,4 +38,6 @@ describe Player do
       end
     end
   end
+
+
 end
