@@ -23,6 +23,7 @@ class HumanPlayer
 
   def print_current_hand
     p 'Your cards are:'
-    p @hand.print_hand
+    p @hand.grouped_cards
+    # @hand.print_hand
   end
 end
