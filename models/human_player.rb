@@ -13,17 +13,29 @@ class HumanPlayer
     @trump = trump
   end
 
-  def draw_card
+  def draw_card(drawed_cards)
+    p "Your oponents drawed #{drawed_cards.inspect}"
     print_current_hand
     p 'Draw card'
-    card = pick_card(gets.chomp)
+    card = gets.chomp
+    card = card.split(' ')
+    card = pick_card(card)
     @hand.drop_chosen_card(card)
     card
   end
 
+  def pick_card(card)
+    @hand.find_card(Card.new(card[0], card[1]))
+  end
+
   def print_current_hand
     p 'Your cards are:'
-    p @hand.grouped_cards
+    @hand.arrange_cards
+    @hand.grouped_cards.each do |color, group|
+      cards = "#{color}:"
+      group.each {|card| cards << " #{card.value},"}
+      p cards
+    end
     # @hand.print_hand
   end
 end

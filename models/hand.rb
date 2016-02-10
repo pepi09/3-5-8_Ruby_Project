@@ -50,4 +50,12 @@ class Hand
     divide_into_colors
     arrange_cards
   end
+
+  def find_card(card)
+    @cards.each do |card_in_hand|
+      if card_in_hand == card
+        return card_in_hand
+      end
+    end
+  end
 end
