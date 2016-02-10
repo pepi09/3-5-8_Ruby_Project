@@ -7,7 +7,7 @@ class Deck
 
   def initialize
     @cards = []
-    colors = %w{heart spade diomond club}
+    colors = %w{heart spade diamond club}
     values = (2..10).to_a.push('J', 'Q', 'K', 'A')
 
     colors.each do |color|
