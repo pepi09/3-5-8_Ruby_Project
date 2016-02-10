@@ -3,8 +3,8 @@ class Player
 
   def initialize(hand)
     @hand = hand
-    # p hand
     @trump = @hand.cards.first.color
+    @min_wins, @current_wins = 0, 0
   end
 
   def choose_trump_color

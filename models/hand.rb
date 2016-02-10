@@ -47,15 +47,19 @@ class Hand
 
   def drop_chosen_card(card)
     @cards.delete(card)
+    p @cards
     divide_into_colors
-    arrange_cards
   end
 
   def find_card(card)
+    chosen_card = nil
     @cards.each do |card_in_hand|
       if card_in_hand == card
-        return card_in_hand
+        chosen_card = card_in_hand
       end
     end
+
+    raise "Card #{card.card} not in hand" unless chosen_card
+    chosen_card
   end
 end

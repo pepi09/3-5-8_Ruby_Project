@@ -18,12 +18,17 @@ load 'models/game.rb'
     drawed_cards, winner = [], 1
 
     game.player_on_turn(winner).each do |index|
-      drawed_cards.push(game.players[index - 1].draw_card(drawed_cards))
+      begin
+        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards))
+      rescue
+        p "Draw again"
+        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards))
+      end
     end
 
     winning_card_index = game.choose_winning_card(drawed_cards)
 
-    @players[winner].current_wins += 1
+    game.players[winner].current_wins += 1
     game.player_on_turn(winner)
   end
 
