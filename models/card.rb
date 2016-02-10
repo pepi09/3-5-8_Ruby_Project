@@ -19,11 +19,11 @@ class Card
     arranged_values.index(@value) <=> arranged_values.index(other.value)
   end
 
-  def <(other)
+  def >(other)
     self.<=>(other) == -1
   end
 
-  def >(other)
+  def <(other)
     self.<=>(other) == 1
   end
 
