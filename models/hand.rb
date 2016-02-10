@@ -11,8 +11,10 @@ class Hand
     @grouped_cards
   end
 
-  def divide_into_colors
-    if @grouped_cards.empty?
+  def divide_into_colors(cards_dropped = false)
+    if @grouped_cards.empty? or cards_dropped
+      @grouped_cards.clear if cards_dropped
+
       @cards.each do |card|
         @grouped_cards[card.color] ||= []
         @grouped_cards[card.color].push card
@@ -47,8 +49,7 @@ class Hand
 
   def drop_chosen_card(card)
     @cards.delete(card)
-    p @cards
-    divide_into_colors
+    divide_into_colors(true)
   end
 
   def find_card(card)
