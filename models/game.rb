@@ -52,11 +52,11 @@ class Game
   def player_on_turn(index)
     case index
     when 1
-      [1, 2, 3]
+      return [1, 2, 3]
     when 2
-      [2, 3, 1]
+      return [2, 3, 1]
     when 3
-      [3, 1, 2]
+      return [3, 1, 2]
     end
   end
 

@@ -13,20 +13,22 @@ load 'models/game.rb'
   game.set_min_wins(1)
   trump = game.players.first.choose_trump_color
   game.set_trump(trump)
+  winner = 1
 
   until game.players.first.hand.cards == []
-    drawed_cards, winner = [], 1
+    drawed_cards = []
 
     game.player_on_turn(winner).each do |index|
       begin
-        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards))
+        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
       rescue
         p "Draw again"
-        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards))
+        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
       end
     end
 
-    winning_card_index = game.choose_winning_card(drawed_cards)
+    p "drawwed_card #{drawed_cards}"
+    winner = game.choose_winning_card(drawed_cards)
 
     game.players[winner].current_wins += 1
     game.player_on_turn(winner)

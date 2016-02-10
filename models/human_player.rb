@@ -4,6 +4,7 @@ class HumanPlayer
   def initialize(hand)
     @hand = hand
     @trump = @hand.cards.first.color
+    @min_wins, @current_wins = 0, 0
   end
 
   def choose_trump_color
@@ -14,7 +15,7 @@ class HumanPlayer
   end
 
   def draw_card(drawed_cards)
-    p "Your oponents drawed #{drawed_cards.inspect}"
+    p "Your oponents drawed #{drawed_cards.map(&:card)}"
     print_current_hand
     p 'Draw card'
     card = gets.chomp
