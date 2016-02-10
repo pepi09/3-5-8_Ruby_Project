@@ -23,6 +23,7 @@ class Game
   end
 
   def choose_winning_card(drawed_cards)
+    winner = 0
     drawed_cards.each_slice(3) do |card_1, card_2, card_3|
       if card_1.color == card_2.color and card_2.color == card_3.color
         winner = drawed_cards.max {|a, b| a <=> b}
@@ -41,16 +42,16 @@ class Game
       elsif card_3.color == card_2.color and card_2.color != @trump and card_1.color == @trump
         winner = card_1
       end
-
-      drawed_cards.index(winner)
     end
 
-    max = drawed_cards.max
-    drawed_cards.index(max)
+    drawed_cards.index(winner)
+
+    # max = drawed_cards.max
+    # drawed_cards.index(max)
   end
 
   def player_on_turn(index)
-    case index
+    case index + 1
     when 1
       return [1, 2, 3]
     when 2

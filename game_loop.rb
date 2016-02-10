@@ -7,13 +7,17 @@ load 'models/human_player.rb'
 load 'models/game.rb'
 
 # until(gets.chomp == 'exit')
+  # names = []
+  # (0...3).each do |index|
+  #   p "Set player names"
+
   game = Game.new
   game.draw
   game.players[0] = HumanPlayer.new(game.players[0].hand)
   game.set_min_wins(1)
   trump = game.players.first.choose_trump_color
   game.set_trump(trump)
-  winner = 1
+  winner = 0
 
   until game.players.first.hand.cards == []
     drawed_cards = []
@@ -27,9 +31,9 @@ load 'models/game.rb'
       end
     end
 
-    p "drawwed_card #{drawed_cards}"
+    p "drawwed_card #{drawed_cards.map(&:card)}"
     winner = game.choose_winning_card(drawed_cards)
-
+    p winner
     game.players[winner].current_wins += 1
     game.player_on_turn(winner)
   end
