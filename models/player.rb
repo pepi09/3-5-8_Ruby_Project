@@ -52,10 +52,12 @@ class Player
   end
 
   def my_max_card(color)
+    @hand.arrange_cards
     @hand.grouped_cards[color].last
   end
 
   def my_min_card(color)
+    @hand.arrange_cards
     @hand.grouped_cards[color].first
   end
 
