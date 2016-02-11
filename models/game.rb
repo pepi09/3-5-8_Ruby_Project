@@ -16,9 +16,9 @@ class Game
     end
   end
 
-  def set_min_wins(number_of_player)
+  def set_min_wins(number_of_first_player)
     @players.each_index do |index|
-      @players[index].min_wins = set_sequence(index)
+      @players[index].min_wins = set_sequence(number_of_first_player)[index]
     end
   end
 
@@ -45,9 +45,6 @@ class Game
     end
 
     drawed_cards.index(winner)
-
-    # max = drawed_cards.max
-    # drawed_cards.index(max)
   end
 
   def player_on_turn(index)
