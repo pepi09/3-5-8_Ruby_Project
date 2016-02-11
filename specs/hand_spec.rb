@@ -38,4 +38,24 @@ describe Hand do
 
     expect(@hand.grouped_cards['heart'].first.value).to eq 'Q'
   end
+
+  it 'drops chosen card' do
+    hand = Hand.new(@deck.clone)
+    hand.drop_chosen_card(@deck[0])
+
+    expect(hand.cards).to_not include @deck[0]
+  end
+
+  context 'finds card in hand' do
+    it 'returns found card' do
+      expect(@hand.find_card(@deck[2])).to eq @deck[2]
+    end
+
+    it 'raises error when card is not in hand' do
+      card = Card.new('club', '2')
+      expect{
+        @hand.find_card(card)
+        }.to raise_error("Card #{card.card} not in hand")
+    end
+  end
 end
