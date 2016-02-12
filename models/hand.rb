@@ -30,15 +30,6 @@ class Hand
     @cards.concat(talon.cards)
   end
 
-  def print_hand
-    @grouped_cards.each do |color, cards|
-      p color
-      cards.each do |card|
-        puts card.value
-      end
-    end
-  end
-
   def arrange_cards
     divide_into_colors if @grouped_cards.empty?
 
