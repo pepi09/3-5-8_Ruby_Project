@@ -10,7 +10,7 @@ load 'models/game.rb'
   # names = []
   # (0...3).each do |index|
   #   p "Set player names"
-
+def play_game
   game = Game.new
   game.draw
   game.players[0] = HumanPlayer.new(game.players[0].hand)
@@ -23,12 +23,11 @@ load 'models/game.rb'
     drawed_cards = []
 
     game.player_on_turn(winner).each do |index|
-      begin
-        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
-      rescue
-        p "Draw again"
-        drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
-      end
+      drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
+      # rescue
+      #   p "Draw again"
+      #   drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
+      # end
     end
 
     p "drawwed_card #{drawed_cards.map(&:card)}"
@@ -44,4 +43,6 @@ load 'models/game.rb'
     p "Min wins: #{player.min_wins}"
     p "Current wins: #{player.current_wins}"
   end
-# end
+end
+
+play_game
