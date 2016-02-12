@@ -37,6 +37,24 @@ class HumanPlayer < Player
     card
   end
 
+  def choose_cards_for_talon
+    p 'Choose which cards to replace with cards in talon.'
+
+    cards_for_talon = []
+
+    (0...3).each do
+      p 'Choose card.'
+      card = read_user_card
+
+      until card and @hand.cards.include? card
+        p 'Card not in hand! Choose again!'
+        card = read_user_card
+      end
+
+      cards_for_talon.push(card)
+    end
+  end
+
   def read_user_card
     card = gets.chomp
     card = card.split(' ')
