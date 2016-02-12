@@ -52,6 +52,7 @@ describe Hand do
     end
 
     it 'raises error when card is not in hand' do
+      pending 'need to decide if I need this'
       card = Card.new('club', '2')
       expect{
         @hand.find_card(card)
