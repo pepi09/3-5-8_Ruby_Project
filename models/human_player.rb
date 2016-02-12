@@ -32,7 +32,7 @@ class HumanPlayer < Player
       card = read_user_card
       p card
     end
-    p "out #{card}"
+
     @hand.drop_chosen_card(card)
     card
   end

@@ -25,25 +25,24 @@ def play_game
 
   p "Cards in talon are #{game.talon.cards.map(&:card)}"
   until game.players.first.hand.cards == []
-    drawed_cards = []
+    drawed_cards, players_cards = [], {}
 
     game.player_on_turn(winner).each do |index|
       drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
-      # rescue
-      #   p "Draw again"
-      #   drawed_cards.push(game.players[index - 1].draw_card(drawed_cards.clone))
-      # end
+      players_cards[index - 1] = drawed_cards.last
     end
 
-    p "drawwed_card #{drawed_cards.map(&:card)}"
-    winner = game.choose_winning_card(drawed_cards)
-    p winner
+    p "Drawwed_cards: #{drawed_cards.map(&:card)}"
+    winner_card_index = game.choose_winning_card(drawed_cards)
+
+    winner = players_cards.key(drawed_cards[winner_card_index])
+    p "Player #{winner} wins this hand. \n"
     game.players[winner].current_wins += 1
     game.player_on_turn(winner)
   end
 
   # game.calculate_winns
-  p Result:
+  p "Result:"
   game.players.each do |player|
     p "Min wins: #{player.min_wins}"
     p "Current wins: #{player.current_wins}"
