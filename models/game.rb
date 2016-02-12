@@ -27,19 +27,26 @@ class Game
     drawed_cards.each_slice(3) do |card_1, card_2, card_3|
       if card_1.color == card_2.color and card_2.color == card_3.color
         winner = drawed_cards.max {|a, b| a <=> b}
+
       elsif card_1.color == card_2.color and card_3.color != @trump
         winner = drawed_cards[0, 2].max {|a, b| a <=> b}
       elsif card_1.color == card_2.color and card_1.color != @trump and card_3.color == @trump
         winner = card_3
+
       elsif card_2.color == @trump and card_1.color != @trump
         if card_3.color == @trump
           winner = drawed_cards[1, 2].max {|a, b| a <=> b}
         else
           winner = card_2
         end
+
       elsif card_1.color == card_3.color and card_2.color != @trump
         winner = [card_1, card_3].max {|a, b| a <=> b}
+
       elsif card_3.color == card_2.color and card_2.color != @trump and card_1.color == @trump
+        winner = card_1
+
+      elsif card_1.color != card_2.color and card_2.color != card_3.color
         winner = card_1
       end
     end
@@ -70,6 +77,7 @@ class Game
   end
 
   def set_trump(trump)
+    @trump = trump
     @players.each do |player|
       player.trump = trump
     end
