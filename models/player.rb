@@ -78,6 +78,8 @@ class Player
 
   def choose_cards_for_talon
     available_colors = COLORS.select { |color| color != @trump }
-    available_colors.map(&:my_min_card)
+    available_colors.map do |color|
+      my_min_card(color)
+    end
   end
 end

@@ -45,6 +45,16 @@ describe Player do
     end
   end
 
+  context 'chooses cards for talon' do
+
+    it 'returns min cards from each color except trump color' do
+      @player.trump = 'spade'
+      cards_for_talon = [@deck[1], @deck[3], @deck[7]]
+
+      expect(@player.choose_cards_for_talon).to match_array(cards_for_talon)
+    end
+  end
+
   context 'compare cards' do
 
     context 'when cards have the same color' do
