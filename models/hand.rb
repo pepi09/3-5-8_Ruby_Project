@@ -58,9 +58,8 @@ class Hand
       if card_in_hand == card
         chosen_card = card_in_hand
       end
-    end
 
-    raise "Card #{card.card} not in hand" unless chosen_card
+    end
     chosen_card
   end
 end
