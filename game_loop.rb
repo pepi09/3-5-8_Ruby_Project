@@ -15,10 +15,15 @@ def play_game
   game.draw
   game.players[0] = HumanPlayer.new(game.players[0].hand)
   game.set_min_wins(1)
+
   trump = game.players.first.choose_trump_color
   game.set_trump(trump)
+
+  cards_for_talon = game.players.first.choose_cards_for_talon
+  game.players.first.set_talon(game.talon, cards_for_talon)
   winner = 0
 
+  p "Cards in talon are #{game.talon.cards.map(&:card)}"
   until game.players.first.hand.cards == []
     drawed_cards = []
 

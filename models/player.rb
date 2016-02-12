@@ -18,6 +18,10 @@ class Player
     end
   end
 
+  def set_talon(talon, cards_to_replace)
+    @hand.apply_talon(talon, cards_to_replace)
+  end
+
   def draw_card(drawed_cards)
     p1_card = drawed_cards[0] ? drawed_cards[0] : nil
     p2_card = drawed_cards[1] ? drawed_cards[1] : nil

@@ -42,7 +42,7 @@ class HumanPlayer < Player
 
     cards_for_talon = []
 
-    (0...3).each do
+    (0..3).each do
       p 'Choose card.'
       card = read_user_card
 
@@ -53,6 +53,8 @@ class HumanPlayer < Player
 
       cards_for_talon.push(card)
     end
+
+    cards_for_talon
   end
 
   def read_user_card

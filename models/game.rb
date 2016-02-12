@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :trump, :players
+  attr_accessor :trump, :players, :talon
 
   def initialize
     @players = []
@@ -9,7 +9,7 @@ class Game
   def draw
     deck = Deck.new.draw
     hands = deck[:hands]
-    talon = deck[:talon]
+    @talon = deck[:talon]
 
     hands.each do |hand|
       @players.push(Player.new(hand))

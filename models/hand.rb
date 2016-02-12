@@ -28,6 +28,7 @@ class Hand
       @cards.delete(card)
     end
     @cards.concat(talon.cards)
+    divide_into_colors(true)
   end
 
   def arrange_cards
