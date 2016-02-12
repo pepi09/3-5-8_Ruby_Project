@@ -1,4 +1,7 @@
 class Player
+
+  COLORS = %w{heart spade club diamond}
+
   attr_accessor :hand, :trump, :min_wins, :current_wins
 
   def initialize(hand)

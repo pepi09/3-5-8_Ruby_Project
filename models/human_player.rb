@@ -1,8 +1,6 @@
 class HumanPlayer < Player
   attr_accessor :hand, :trump, :min_wins, :current_wins
 
-  COLORS = %w{heart spade club diamond}
-
   def initialize(hand)
     @hand = hand
     @trump = @hand.cards.first.color
@@ -57,6 +55,5 @@ class HumanPlayer < Player
       group.each {|card| cards << " #{card.value},"}
       p cards
     end
-    # @hand.print_hand
   end
 end
