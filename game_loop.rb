@@ -22,11 +22,11 @@ class GameLoop
     cards_for_talon = @game.players[first_player - 1].choose_cards_for_talon
     @game.players[first_player - 1].set_talon(@game.talon, cards_for_talon)
 
-    winner = 0
+    winner = first_player - 1
 
     p "Cards in talon are #{@game.talon.cards.map(&:card)}"
 
-    until @game.players[first_player - 1].hand.cards == []
+    until @game.players[winner].hand.cards.empty?
       drawed_cards, players_cards = [], {}
 
       @game.player_on_turn(winner).each do |index|
@@ -54,6 +54,7 @@ class GameLoop
       play_game(true, index)
     end
 
+    puts "\n"
     p "Game Over!"
     print_result
   end

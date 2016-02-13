@@ -50,7 +50,6 @@ class Hand
       if card_in_hand == card
         chosen_card = card_in_hand
       end
-
     end
     chosen_card
   end

@@ -33,7 +33,7 @@ class Player
     elsif p1_card
       chosen_card = choose_card(p1_card)
     else
-      chosen_card = my_max_card(@hand.grouped_cards.first.first)
+      chosen_card = my_max_card(available_colors.sample)
     end
 
     @hand.drop_chosen_card(chosen_card)
@@ -56,16 +56,20 @@ class Player
         return my_min_card(@trump)
       end
     else
-      return my_min_card(@hand.grouped_cards.first.first)
+      return my_min_card(available_colors.sample)
     end
   end
 
   def my_max_card(color)
+    color = available_colors.sample unless available_colors.include? color
+
     @hand.arrange_cards
     @hand.grouped_cards[color].last
   end
 
   def my_min_card(color)
+    color = available_colors.sample unless available_colors.include? color
+
     @hand.arrange_cards
     @hand.grouped_cards[color].first
   end
@@ -91,5 +95,14 @@ class Player
 
   def calculate_result
     @result += @current_wins - @min_wins
+  end
+
+  def available_colors
+    colors = COLORS.select do |color|
+      p @hand.grouped_cards[color]
+      @hand.grouped_cards[color] != nil
+    end
+    p colors
+    colors
   end
 end
