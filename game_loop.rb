@@ -22,11 +22,16 @@ class GameLoop
     cards_for_talon = @game.players[first_player - 1].choose_cards_for_talon
     @game.players[first_player - 1].set_talon(@game.talon, cards_for_talon)
 
+    @game.players.each do |player|
+      player.current_wins = 0
+    end
+
     winner = first_player - 1
+    played_hands = 0
 
     p "Cards in talon are #{@game.talon.cards.map(&:card)}"
 
-    until @game.players[winner].hand.cards.empty?
+    until played_hands == 16
       drawed_cards, players_cards = [], {}
 
       @game.player_on_turn(winner).each do |index|
@@ -36,7 +41,7 @@ class GameLoop
 
       p "Drawed_cards: #{drawed_cards.map(&:card)}"
       winner_card_index = @game.choose_winning_card(drawed_cards)
-
+      played_hands += 1
       winner = players_cards.key(drawed_cards[winner_card_index])
       p "Player #{winner} wins this hand."
       @game.players[winner].current_wins += 1
@@ -56,14 +61,14 @@ class GameLoop
 
     puts "\n"
     p "Game Over!"
-    print_result
+    print_result(true)
   end
 
-  def print_result
+  def print_result(game_result = false)
     puts "\n"
     p "Result:"
     @game.players.each do |player|
-      player.calculate_result
+      player.calculate_result unless game_result
       puts "\n"
       p "Player #{@game.players.index(player)}"
       p "Min wins:     #{player.min_wins}"

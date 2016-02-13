@@ -99,10 +99,8 @@ class Player
 
   def available_colors
     colors = COLORS.select do |color|
-      p @hand.grouped_cards[color]
       @hand.grouped_cards[color] != nil
     end
-    p colors
     colors
   end
 end
