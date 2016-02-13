@@ -2,20 +2,22 @@ class Player
 
   COLORS = %w{heart spade club diamond}
 
-  attr_accessor :hand, :trump, :min_wins, :current_wins
+  attr_accessor :hand, :trump, :min_wins, :current_wins, :result
 
   def initialize(hand)
     @hand = hand
     @trump = @hand.cards.first.color
-    @min_wins, @current_wins = 0, 0
+    @min_wins, @current_wins, @result = 0, 0, 0
   end
 
   def choose_trump_color
+    @trump = @hand.cards.first.color
     @hand.grouped_cards.each do |color, cards|
       if cards.length > @hand.grouped_cards[@trump].length
         @trump = color
       end
     end
+    @trump
   end
 
   def set_talon(talon, cards_to_replace)
@@ -85,5 +87,9 @@ class Player
     available_colors.map do |color|
       my_min_card(color)
     end
+  end
+
+  def calculate_result
+    @result += @current_wins - @min_wins
   end
 end

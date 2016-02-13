@@ -6,14 +6,21 @@ class Game
     @trump
   end
 
-  def draw
+  def draw(continue = false)
     deck = Deck.new.draw
     hands = deck[:hands]
     @talon = deck[:talon]
 
-    hands.each do |hand|
-      @players.push(Player.new(hand))
+    unless continue
+      hands.each do |hand|
+        @players.push(Player.new(hand))
+      end
+    else
+      hands.each_index do |index|
+        @players[index].hand = hands[index]
+      end
     end
+
   end
 
   def set_min_wins(number_of_first_player)
@@ -45,8 +52,13 @@ class Game
 
       elsif card_3.color == card_2.color and card_2.color != @trump and card_1.color == @trump
         winner = card_1
+      elsif card_3.color == card_2.color and card_2.color != @trump and card_1.color != @trump
+        winner = card_1
 
-      elsif card_1.color != card_2.color and card_2.color != card_3.color
+      elsif card_1.color != card_2.color and card_2.color != @trump and  card_1.color != @trump and  card_3.color == @trump
+        winner = card_3
+
+      elsif card_1.color != card_2.color and card_2.color != card_3.color and  card_3.color != @trump
         winner = card_1
       end
     end

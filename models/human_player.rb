@@ -1,10 +1,10 @@
 class HumanPlayer < Player
-  attr_accessor :hand, :trump, :min_wins, :current_wins
+  attr_accessor :hand, :trump, :min_wins, :current_wins, :result
 
   def initialize(hand)
     @hand = hand
     @trump = @hand.cards.first.color
-    @min_wins, @current_wins = 0, 0
+    @min_wins, @current_wins, @result = 0, 0, 0
   end
 
   def choose_trump_color
@@ -21,8 +21,10 @@ class HumanPlayer < Player
   end
 
   def draw_card(drawed_cards)
+    puts "\n"
     p "Your oponents drawed #{drawed_cards.map(&:card)}"
     print_current_hand
+    p "Trump is: '#{@trump}'"
 
     p 'Draw card'
     card = read_user_card
